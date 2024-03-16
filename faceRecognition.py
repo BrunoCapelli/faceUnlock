@@ -12,12 +12,13 @@ face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 # Read the model
 
-#face_recognizer.read('modelLBPHFFace.xml') 					#LBPHF
-face_recognizer.read('modelLBPHF_test.xml')						#LBPHF
+#face_recognizer.read('modelLBPHFFace.xml') 					#LBPHF modelLBPHF_test1603.xml
+#face_recognizer.read('modelLBPHF_test.xml')						#LBPHF
+face_recognizer.read('modelLBPHF_test1603.xml')						#LBPHF
 
 
-#cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
-cap = cv2.VideoCapture('C:/Users/bruno/OneDrive/Desktop/faceUnlock/test/test3.mp4')
+cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+#cap = cv2.VideoCapture('C:/Users/bruno/OneDrive/Desktop/faceUnlock/test/test3.mp4')
 
 faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
 

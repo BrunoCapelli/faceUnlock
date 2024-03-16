@@ -11,7 +11,7 @@ if not os.path.exists(personPath):
 	os.makedirs(personPath)
 
 #cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)  # Debug pictures on live camera
-cap = cv2.VideoCapture('C:/Users/bruno/OneDrive/Desktop/faceUnlock/test/test2.mp4') # Analyze frame by frame from video
+cap = cv2.VideoCapture('C:/Users/bruno/OneDrive/Desktop/faceUnlock/test/vid01.mp4') # Analyze frame by frame from video
 
 faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
 count = 0

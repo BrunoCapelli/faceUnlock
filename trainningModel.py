@@ -36,6 +36,6 @@ face_recognizer.train(facesData, np.array(labels))
 
 # Save the model
 
-face_recognizer.write('modelFisherFace_test.xml')
-#face_recognizer.write('modelLBPHF_test.xml')
+#face_recognizer.write('modelFisherFace_test.xml')
+face_recognizer.write('modelLBPHF_test1603.xml')
 print("Model created!")
