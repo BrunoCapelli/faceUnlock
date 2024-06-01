@@ -3,7 +3,7 @@ import cv2
 import os
 import numpy as np
 
-dataPath = 'C:/Users/bruno/OneDrive/Desktop/faceUnlock/Data' # Main route
+dataPath = 'C:/Users/bruno/OneDrive/Desktop/TakeControl_faceUnlock/Data' # Main route
 peopleList = os.listdir(dataPath)
 
 print('List of users: ', peopleList)
@@ -27,8 +27,7 @@ for nameDir in peopleList:
     label = label +1
 
 
-face_recognizer = cv2.face.FisherFaceRecognizer_create()
-#face_recognizer = cv2.face.LBPHFaceRecognizer_create()
+face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 print("Trainning...")
 
@@ -36,6 +35,5 @@ face_recognizer.train(facesData, np.array(labels))
 
 # Save the model
 
-face_recognizer.write('modelFisherFace_test.xml')
-#face_recognizer.write('modelLBPHF_test1603.xml')
+face_recognizer.write('modelLBPHF_test0106.xml')
 print("Model created!")

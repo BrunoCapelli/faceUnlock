@@ -3,7 +3,7 @@ import os
 import imutils
 import requests
 
-dataPath = 'C:/Users/bruno/OneDrive/Desktop/faceUnlock/Data' # Main route
+dataPath = 'C:/Users/bruno/OneDrive/Desktop/TakeControl_faceUnlock/Data' # Main route
 imagePaths = os.listdir(dataPath)
 #print('imagePaths=',imagePaths)
 
@@ -13,7 +13,7 @@ def LBPHFaceDetection():
 	face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 	# Read the model
-	face_recognizer.read('modelLBPHF_test1603.xml')	
+	face_recognizer.read('modelLBPHF_test0106.xml')	
 
 	# Inputs
 	cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
@@ -23,8 +23,9 @@ def LBPHFaceDetection():
 
 	counter = 10
 	isRecognized = False
+	isRunning = True
 	
-	while True:
+	while isRunning:
 		ret,frame = cap.read()
 		if ret == False: 
 			break
@@ -38,25 +39,26 @@ def LBPHFaceDetection():
 				face = auxFrame[y:y+h,x:x+w]
 				face = cv2.resize(face,(150,150),interpolation= cv2.INTER_CUBIC)
 				result = face_recognizer.predict(face)
-				cv2.putText(frame,'{}'.format(result),(x,y-5),1,1.3,(255,255,0),1,cv2.LINE_AA)
+				#cv2.putText(frame,'{}'.format(result),(x,y-5),1,1.3,(255,255,0),1,cv2.LINE_AA)
 
 				# LBPHFace
 				if result[1] < 70:
-					cv2.putText(frame,'{}'.format(imagePaths[result[0]]),(x,y-25),2,1.1,(0,255,0),1,cv2.LINE_AA)
-					cv2.rectangle(frame, (x,y),(x+w,y+h),(0,255,0),2)
+					#cv2.putText(frame,'{}'.format(imagePaths[result[0]]),(x,y-25),2,1.1,(0,255,0),1,cv2.LINE_AA)
+					#cv2.rectangle(frame, (x,y),(x+w,y+h),(0,255,0),2)
 					counter = counter + 2
 					
 					if(counter > 30):
 						# Case where the person was detected. At least 15 frames had matched with the person's face
 						# Execute face auth
 						print('Known user detected')
+						isRunning = False
 						isRecognized = True
 
 						cap.release()
 						cv2.destroyAllWindows()
 				else:
-					cv2.putText(frame,'Desconocido',(x,y-20),2,0.8,(0,0,255),1,cv2.LINE_AA)
-					cv2.rectangle(frame, (x,y),(x+w,y+h),(0,0,255),2)
+					#cv2.putText(frame,'Desconocido',(x,y-20),2,0.8,(0,0,255),1,cv2.LINE_AA)
+					#cv2.rectangle(frame, (x,y),(x+w,y+h),(0,0,255),2)
 					counter -= 1
 					if (counter <= 0):
 						# Case where the person was not detected. None of the frames contained the person face
@@ -70,9 +72,6 @@ def LBPHFaceDetection():
 	return isRecognized
 
 ### ### ### ### ### 
-
-## Face Mesh ##
-#mp_face_mesh = mp.solutions.face_mesh
 
 ### Begins ###
 
