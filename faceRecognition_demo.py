@@ -2,6 +2,8 @@ import cv2
 import os
 import imutils
 import requests
+import hardwareModule
+import json
 
 dataPath = 'C:/Users/bruno/OneDrive/Desktop/TakeControl_faceUnlock/Data' # Main route
 imagePaths = os.listdir(dataPath)
@@ -71,18 +73,42 @@ def LBPHFaceDetection():
 	
 	return isRecognized
 
+def LoginStepOne(url, idDevice, hwdId):
+
+	params = {
+		'idDevice': idDevice,
+		'hwd': hwdId
+	}
+	request = requests.post(url, params=params, verify=False)
+	return request.content
+
+def LoginStepTwo(url, idUser, idDevice, hwdId, token):
+	headers = {'Authorization': f'Bearer {token}'}
+	params = {
+		'idDevice': idDevice,
+		'idUser': idUser,
+		'hwd': hwdId
+	}
+	request = requests.post(url, params=params, headers=headers, verify=False)
+	return request
+
 ### ### ### ### ### 
 
 ### Begins ###
 
-url = 'https://localhost:44305/api/User/Login'
-params = {
-    'idDevice': 1,
-    'idUser': 'Bruno',
-    'hwd': 'hwd'
-}
+urlDevice = 'https://localhost:44305/api/Device/LoginStepOne'
+urlUser = 'https://localhost:44305/api/User/LoginStepTwo'
+hwd = hardwareModule.getHardwareID()
+
 retries = 0
 isUserDetected = False
+
+#  Get access token 
+response = LoginStepOne(urlDevice, 1, 'hwd')
+response_dict = json.loads(response)
+access_token = response_dict['accessToken']
+
+
 
 while retries <= 2 and not isUserDetected:
 	isUserDetected = LBPHFaceDetection()
@@ -93,18 +119,18 @@ while retries <= 2 and not isUserDetected:
 
 if(isUserDetected):
 	try:
-		request = requests.post(url, params=params, verify=False)
-		print(request)
+		responseLogin = LoginStepTwo(urlUser, 'Bruno', 1, 'hwd', access_token)
+		print(responseLogin.status_code)
 	except Exception as e:
 		print(e)
 else:
 	try:
-		request = requests.post(url, params={
+		request = requests.post(urlUser, params={
 			'idDevice': 2,
 			'idUser': 'unknown',
 			'hwd': 'null'}, verify=False)
 		print(request)
 	except Exception as e:
-		print(e)
+		print(e) 
 
 
