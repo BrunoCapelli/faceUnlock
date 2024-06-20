@@ -39,10 +39,7 @@ def main():
 			print(e)
 	else:
 		try:
-			request = requests.post(urlUser, params={
-				'idDevice': 2,
-				'idUser': 'unknown',
-				'hwd': 'null'}, verify=False)
+			request = apiModule.LoginStepTwo(urlUser, 'unknown', 2,'x',access_token)
 			print(request)
 		except Exception as e:
 			print(e) 

@@ -2,7 +2,7 @@ import hashlib
 
 __all__ = ['getHardwareID']
 
-def hash(input_string):
+def _hash(input_string):
     sha512_hash = hashlib.sha512()
     sha512_hash.update(input_string.encode('utf-8'))
     return sha512_hash.hexdigest()
@@ -44,7 +44,7 @@ def getHardwareID():
 
     if serial!=None and ram_size!=None and sd_id!=None   :
         hardwareID = serial+ram_size+sd_id 
-        hardwareIDHashed = hash(hardwareID)
+        hardwareIDHashed = _hash(hardwareID)
         return hardwareIDHashed
     else:
         return 'Error: The Hardware ID was not generated.'
