@@ -3,7 +3,7 @@ import cv2
 import os
 import numpy as np
 
-dataPath = 'C:/Users/bruno/OneDrive/Desktop/TakeControl_faceUnlock/Data' # Main route
+dataPath = '/home/admin/takeControl/takeControl_data' # Main route
 peopleList = os.listdir(dataPath)
 
 print('List of users: ', peopleList)

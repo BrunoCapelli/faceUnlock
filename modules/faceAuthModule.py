@@ -10,8 +10,9 @@ def LBPHFaceDetection():
 	face_recognizer.read('./models/modelLBPHF_test0106.xml')	
 
 	# Inputs
-	cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+	#cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
 	#cap = cv2.VideoCapture('C:/Users/bruno/OneDrive/Desktop/faceUnlock/test/test3.mp4')
+	cap = cv2.VideoCapture(0)
 
 	faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
 
@@ -38,7 +39,7 @@ def LBPHFaceDetection():
 				hash_object = hashlib.sha256(result_str.encode())
 				hex_dig = hash_object.hexdigest() # Get the hash on hex format
 
-				print(f'El hash generado es {hex_dig} ')
+				#print(f'El hash generado es {hex_dig} ')
 
 				 
 
