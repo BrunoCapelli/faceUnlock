@@ -3,7 +3,7 @@ import requests
 import json
 from modules import hardwareModule, apiModule, faceAuthModule
 
-dataPath = '/home/admin/takeControl/takeControl_data' # Main route
+dataPath = 'C:/Users/bruno/OneDrive/Desktop/Proyectos/TakeControl/TakeControlDevice/TakeControl_faceUnlock/Data' # Main route
 imagePaths = os.listdir(dataPath)
 #print('imagePaths=',imagePaths)
 
@@ -11,8 +11,8 @@ imagePaths = os.listdir(dataPath)
 
 def main():
 
-	urlDevice = 'https://192.168.1.28:44305/api/Device/LoginStepOne'
-	urlUser = 'https://192.168.1.28:44305/api/User/LoginStepTwo'
+	urlDevice = 'http://takecontrol.somee.com/api/Device/LoginStepOne'
+	urlUser = 'http://takecontrol.somee.com/api/User/LoginStepTwo'
 	hwd = hardwareModule.getHardwareID()
 
 	retries = 0
@@ -34,7 +34,7 @@ def main():
 	if(isUserDetected):
 		try:
 			responseLogin = apiModule.LoginStepTwo(urlUser, 'Bruno', 1, 'hwd', access_token)
-			print(responseLogin.status_code)
+			#print(responseLogin.status_code)
 		except Exception as e:
 			print(e)
 	else:

@@ -2,8 +2,9 @@
 import cv2
 import os
 import numpy as np
+from modules import paths
 
-dataPath = '/home/admin/takeControl/takeControl_data' # Main route
+dataPath = paths.MAIN_ROUTE
 peopleList = os.listdir(dataPath)
 
 print('List of users: ', peopleList)
@@ -35,5 +36,6 @@ face_recognizer.train(facesData, np.array(labels))
 
 # Save the model
 
-face_recognizer.write('modelLBPHF_test0106.xml')
+model_name=input("Ingrese un nombre de modelo: ")
+face_recognizer.write(model_name+'.xml')
 print("Model created!")
