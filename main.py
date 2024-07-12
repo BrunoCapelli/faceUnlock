@@ -1,9 +1,9 @@
 import os
 import requests
 import json
-from modules import hardwareModule, apiModule, faceAuthModule
+from modules import hardwareModule, apiModule, faceAuthModule, paths
 
-dataPath = 'C:/Users/bruno/OneDrive/Desktop/Proyectos/TakeControl/TakeControlDevice/TakeControl_faceUnlock/Data' # Main route
+dataPath = os.path.join(paths.MAIN_ROUTE, paths.DATA) # Main route
 imagePaths = os.listdir(dataPath)
 #print('imagePaths=',imagePaths)
 

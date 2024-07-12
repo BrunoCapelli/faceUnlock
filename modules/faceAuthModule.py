@@ -8,7 +8,7 @@ def LBPHFaceDetection():
 	face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 	# Read the model
-	face_recognizer.read('./models/modelLBPHF_test0106.xml')	
+	face_recognizer.read(os.path.join(paths.MAIN_ROUTE, paths.MODELS, 'ModeloAdmin.xml'))	
 
 	# Inputs
 	#cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
@@ -16,8 +16,8 @@ def LBPHFaceDetection():
 	cap = cv2.VideoCapture(0)
 
 	#faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
-	cascade_filename = '/home/admin/takeControl/TakeControlDevice/haarcascade_frontalface_default.xml'
-	cascade_path = os.path.join(os.path.dirname(cv2.__file__), 'takeControl', cascade_filename)
+	cascade_filename = os.path.join(paths.MAIN_ROUTE,'haarcascade_frontalface_default.xml')
+	cascade_path = os.path.join(os.path.dirname(cv2.__file__), 'takeControl', cascade_filename) #Terminar de paresar las rutas
 	faceClassif = cv2.CascadeClassifier(cascade_path)
 
 
@@ -54,7 +54,7 @@ def LBPHFaceDetection():
 					
 					if(counter > 30):
 						# Case where the person was detected. At least 15 frames had matched with the person's face
-						print('Known user detected')
+						print(' -- Registered user was detected --')
 						isRunning = False
 						isRecognized = True
 
@@ -75,7 +75,6 @@ def LBPHFaceDetection():
 
 def Generate_Faces(userName):
     
-	personName = userName
 	dataPath = paths.DATA
 	personPath = os.path.join(dataPath, userName)
 
@@ -90,7 +89,7 @@ def Generate_Faces(userName):
 
 	#faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
 
-	cascade_filename = '/home/admin/takeControl/TakeControlDevice/haarcascade_frontalface_default.xml'
+	cascade_filename = os.path.join(paths.MAIN_ROUTE, 'haarcascade_frontalface_default.xml')
 	cascade_path = os.path.join(os.path.dirname(cv2.__file__), 'takeControl', cascade_filename)
 	faceClassif = cv2.CascadeClassifier(cascade_path)
 
