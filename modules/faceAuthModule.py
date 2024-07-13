@@ -8,17 +8,25 @@ def LBPHFaceDetection():
 	face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 	# Read the model
-	face_recognizer.read(os.path.join(paths.MAIN_ROUTE, paths.MODELS, 'ModeloAdmin.xml'))	
-
+	if os.path.exists(os.path.join(paths.MAIN_ROUTE, paths.MODELS, 'ModeloAdmin.xml')):
+		face_recognizer.read(os.path.join(paths.MAIN_ROUTE, paths.MODELS, 'ModeloAdmin.xml'))	
+	else:
+		raise FileNotFoundError(f"The file {os.path.join(paths.MAIN_ROUTE, paths.MODELS, 'ModeloAdmin.xml')} does not exist")
+	
+	
 	# Inputs
 	#cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
 	#cap = cv2.VideoCapture('C:/Users/bruno/OneDrive/Desktop/faceUnlock/test/test3.mp4')
 	cap = cv2.VideoCapture(0)
 
 	#faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
-	cascade_filename = os.path.join(paths.MAIN_ROUTE,'haarcascade_frontalface_default.xml')
-	cascade_path = os.path.join(os.path.dirname(cv2.__file__), 'takeControl', cascade_filename) #Terminar de paresar las rutas
-	faceClassif = cv2.CascadeClassifier(cascade_path)
+
+	if os.path.exists(os.path.join(paths.MAIN_ROUTE, paths.LIB,'haarcascade_frontalface_default.xml')):
+		cascade_filename = os.path.join(paths.MAIN_ROUTE, paths.LIB,'haarcascade_frontalface_default.xml')
+		cascade_path = os.path.join(os.path.dirname(cv2.__file__), 'takeControl', cascade_filename)
+		faceClassif = cv2.CascadeClassifier(cascade_path)
+	else:
+		raise FileNotFoundError(f"The file {os.path.join(paths.MAIN_ROUTE, paths.LIB,'haarcascade_frontalface_default.xml')} does not exist")
 
 
 	counter = 10
@@ -41,13 +49,12 @@ def LBPHFaceDetection():
 				result = face_recognizer.predict(face)
 				label, confidence = face_recognizer.predict(face)
 				result_str = f"Label: {label}, Confidence: {confidence}"
+				""" 
 				hash_object = hashlib.sha256(result_str.encode())
 				hex_dig = hash_object.hexdigest() # Get the hash on hex format
-
-				#print(f'El hash generado es {hex_dig} ')
-				print(counter)
-
-				 
+				print(f'El hash generado es {hex_dig} ') 
+				"""
+				print(counter)				 
 
 				if result[1] < 70:
 					counter = counter + 2
@@ -75,23 +82,28 @@ def LBPHFaceDetection():
 
 def Generate_Faces(userName):
     
-	dataPath = paths.DATA
+	dataPath = os.path.join(paths.MAIN_ROUTE,paths.DATA)
 	personPath = os.path.join(dataPath, userName)
 
 	if not os.path.exists(personPath):
 		print('Folder created: ',personPath)
 		os.makedirs(personPath)
+	else:
+		raise FileExistsError("User already exists!")
 	
 	#cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)  # Debug pictures on live camera
 	#cap = cv2.VideoCapture('C:/Users/bruno/OneDrive/Desktop/faceUnlock/test/vid01.mp4') # Analyze frame by frame from video
 	#cap = cv2.VideoCapture('/home/admin/takeControl/TakeControlDevice/vid01.mp4') # Analyze frame by frame from video
 	cap = cv2.VideoCapture(0)
 
-	#faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
+	# Read trainer
+	if os.path.exists(os.path.join(paths.MAIN_ROUTE, paths.LIB,'haarcascade_frontalface_default.xml')):
+		cascade_filename = os.path.join(paths.MAIN_ROUTE, paths.LIB,'haarcascade_frontalface_default.xml')
+		cascade_path = os.path.join(os.path.dirname(cv2.__file__), 'takeControl', cascade_filename)
+		faceClassif = cv2.CascadeClassifier(cascade_path)
+	else:
+		raise FileNotFoundError(f"The file {os.path.join(paths.MAIN_ROUTE, paths.LIB,'haarcascade_frontalface_default.xml')} does not exist")
 
-	cascade_filename = os.path.join(paths.MAIN_ROUTE, 'haarcascade_frontalface_default.xml')
-	cascade_path = os.path.join(os.path.dirname(cv2.__file__), 'takeControl', cascade_filename)
-	faceClassif = cv2.CascadeClassifier(cascade_path)
 
 	count = 0
 	isRunning = True
@@ -110,7 +122,7 @@ def Generate_Faces(userName):
 			cv2.imwrite(personPath + '/_face_{}.jpg'.format(count),face)
 			count = count + 1
 			print(count)
-			if(count == 250):
+			if(count == 40): # Amount of pictures 
 				isRunning = False
 			
 		#cv2.imshow('frame',frame)
@@ -123,32 +135,44 @@ def Generate_Faces(userName):
 	cv2.destroyAllWindows()
 
 def Training_Model(modelName):
-    dataPath = paths.DATA
-    peopleList = os.listdir(dataPath)
+	#dataPath = '/home/admin/takeControl/takeControl_data'
 
-    print('List of users: ', peopleList)
+	if os.path.exists(os.path.join(paths.MAIN_ROUTE,paths.DATA)):
+		dataPath = os.path.join(paths.MAIN_ROUTE,paths.DATA)
+		peopleList = os.listdir(dataPath)
+	else:
+		raise FileNotFoundError(f"The file {os.path.join(paths.MAIN_ROUTE,paths.DATA)} does not exist") 
+ 
+	peopleList = os.listdir(dataPath)
+    #print('List of users: ', peopleList)
 
-    labels = []
-    facesData = []
-    label = 0
+	labels = []
+	facesData = []
+	label = 0
 
-    for nameDir in peopleList:
-        personPath = dataPath + '/' + nameDir
-        print("Reading pictures...")
+	for nameDir in peopleList:
+		personPath = os.path.join(dataPath, nameDir) 
 
-        for fileName in os.listdir(personPath):
-            print('Rostros: ', nameDir + fileName )
-            labels.append(label)
-            facesData.append(cv2.imread(personPath+'/'+fileName, 0)) # Pic to gray scale
-            image = cv2.imread(personPath+'/'+fileName, 0)
-            #cv2.imshow('image',image) # Show pictures after applying gray scale
-            #cv2.waitKey(10)
-        label = label +1
-    face_recognizer = cv2.face.LBPHFaceRecognizer_create()
-    print("Trainning...")
-    face_recognizer.train(facesData, np.array(labels))
+		for fileName in os.listdir(personPath):
+			#print('Faces: ', nameDir + fileName )
+			labels.append(label)
+			facesData.append(cv2.imread(personPath+'/'+fileName, 0)) 
+			image = cv2.imread(personPath+'/'+fileName, 0)
+			#cv2.imshow('image',image) # Show pictures after applying gray scale
+			#cv2.waitKey(10)
+		label = label +1
+	face_recognizer = cv2.face.LBPHFaceRecognizer_create()
+	print("Trainning...")
+
+	if facesData:
+		face_recognizer.train(facesData, np.array(labels))
+	else:
+		raise Exception("Error: Empty face data.")  
+
+	#face_recognizer.train(facesData, np.array(labels))
 
     # Save the model
 
-    face_recognizer.write(modelName+'.xml')
-    print("Model created!")
+	modelPath = os.path.join(paths.MAIN_ROUTE, paths.MODELS, modelName +  '.xml')
+	face_recognizer.write(modelPath)
+	print("Model created!") 

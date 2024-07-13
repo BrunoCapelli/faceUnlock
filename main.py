@@ -25,16 +25,19 @@ def main():
 
 
 	while retries <= 2 and not isUserDetected:
-		isUserDetected = faceAuthModule.LBPHFaceDetection()
-		if(isUserDetected):
-			isUserDetected = True
-		else:
-			retries+=1
+		try:
+			isUserDetected = faceAuthModule.LBPHFaceDetection()
+			if(isUserDetected):
+				isUserDetected = True
+			else:
+				retries+=1
+		except Exception as e:
+			print(e)
 
 	if(isUserDetected):
 		try:
 			responseLogin = apiModule.LoginStepTwo(urlUser, 'Bruno', 1, 'hwd', access_token)
-			#print(responseLogin.status_code)
+			print("Sending notification...")
 		except Exception as e:
 			print(e)
 	else:
