@@ -1,7 +1,8 @@
 import os
 import requests
 import json
-from modules import hardwareModule, apiModule, faceAuthModule, paths
+from modules import hardwareModule, apiModule, faceAuthModule, paths, GPIO_handler
+import time
 
 dataPath = os.path.join(paths.MAIN_ROUTE, paths.DATA) # Main route
 imagePaths = os.listdir(dataPath)
@@ -38,16 +39,24 @@ def main():
 		try:
 			responseLogin = apiModule.LoginStepTwo(urlUser, 'Bruno', 1, 'hwd', access_token)
 			print("Sending notification...")
+			if responseLogin.ok:
+				GPIO_handler.Activate_Pin17() # Green LED
+				time.sleep(20)
 		except Exception as e:
 			print(e)
 	else:
 		try:
 			request = apiModule.LoginStepTwo(urlUser, 'unknown', 2,'x',access_token)
 			print(request)
+			if request.ok:
+				GPIO_handler.Activate_Pin27() # Red LED
+				time.sleep(20)
 		except Exception as e:
 			print(e) 
 
 if __name__ == "__main__":
-    main()
+	GPIO_handler.InitializePins()
+	main()
+	GPIO_handler.Deactivate()
 
 
