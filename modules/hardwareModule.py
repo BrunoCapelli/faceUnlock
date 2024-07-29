@@ -23,7 +23,7 @@ def _get_ram_size():
                 if line.startswith('MemTotal'):
                     mem_total_kb = int(line.split()[1])
                     mem_total_mb = mem_total_kb / 1024
-                    return f"{mem_total_mb:.2f} MB"
+                    return f"{mem_total_mb:.2f}"
     except FileNotFoundError:
         return None
 
@@ -34,6 +34,9 @@ def _get_sd_card_id():
             return cid
     except FileNotFoundError:
         return None
+
+#def _get_wifi_mac_address():
+
 
 def getHardwareID():
     serial = _get_cpu_serial()
