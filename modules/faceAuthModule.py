@@ -82,8 +82,14 @@ def LBPHFaceDetection():
 
 def Generate_Faces(userName):
     
+	
+
 	dataPath = os.path.join(paths.MAIN_ROUTE,paths.DATA)
 	personPath = os.path.join(dataPath, userName)
+
+	if not os.path.exists(dataPath):
+		print('Folder created: ',dataPath)
+		os.makedirs(personPath)
 
 	if not os.path.exists(personPath):
 		print('Folder created: ',personPath)
