@@ -66,16 +66,15 @@ def LBPHFaceDetection():
 						isRecognized = True
 
 						cap.release()
-						cv2.destroyAllWindows()
+						
 				else:
 					counter -= 1
 					if (counter <= 0):
 						# Case where the person was not detected. None of the frames contained the person face
 						cap.release()
-						cv2.destroyAllWindows()
+						
 			#cv2.imshow('FaceAuth',frame)
 	cap.release()  # This line is to stop the input
-	cv2.destroyAllWindows()
 	
 	return isRecognized
 
@@ -136,7 +135,6 @@ def Generate_Faces(userName):
 
 
 	cap.release()
-	cv2.destroyAllWindows()
 
 def Training_Model(modelName):
 	#dataPath = '/home/admin/takeControl/takeControl_data'
