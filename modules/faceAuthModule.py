@@ -133,9 +133,6 @@ def Generate_Faces(userName):
 			
 		#cv2.imshow('frame',frame)
 
-		k =  cv2.waitKey(1)
-		if k == 27 or count >= 450:
-			break
 
 	cap.release()
 	cv2.destroyAllWindows()
