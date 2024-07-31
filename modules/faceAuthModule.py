@@ -85,17 +85,18 @@ def Generate_Faces(userName):
 	
 
 	dataPath = os.path.join(paths.MAIN_ROUTE,paths.DATA)
-	personPath = os.path.join(dataPath, userName)
+	os.makedirs(dataPath, userName)
+	#personPath = os.path.join(dataPath, userName)
 
-	if not os.path.exists(dataPath):
+	""" if not os.path.exists(dataPath):
 		print('Folder created: ',dataPath)
-		os.makedirs(personPath)
+		os.makedirs(personPath) """
 
-	if not os.path.exists(personPath):
+	""" if not os.path.exists(personPath):
 		print('Folder created: ',personPath)
 		os.makedirs(personPath)
 	else:
-		raise FileExistsError("User already exists!")
+		raise FileExistsError("User already exists!") """
 	
 	#cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)  # Debug pictures on live camera
 	#cap = cv2.VideoCapture('C:/Users/bruno/OneDrive/Desktop/faceUnlock/test/vid01.mp4') # Analyze frame by frame from video
