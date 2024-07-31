@@ -85,6 +85,7 @@ def Generate_Faces(userName):
 	
 
 	dataPath = os.path.join(paths.MAIN_ROUTE,paths.DATA)
+	print(dataPath)
 	os.makedirs(dataPath, userName)
 
 	print("Directory OK")
