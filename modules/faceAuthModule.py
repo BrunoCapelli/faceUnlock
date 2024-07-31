@@ -85,11 +85,8 @@ def Generate_Faces(userName):
 	
 
 	dataPath = os.path.join(paths.MAIN_ROUTE,paths.DATA)
-	print(dataPath)
-	os.makedirs(dataPath, userName)
-
-	print("Directory OK")
-	#personPath = os.path.join(dataPath, userName)
+	personPath = os.path.join(dataPath, userName)
+	os.makedirs(personPath)
 
 	""" if not os.path.exists(dataPath):
 		print('Folder created: ',dataPath)
