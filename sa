@@ -1,0 +1,107 @@
+[33mcommit 6eed5896d28d241c73fb4e5dd7b440f67fc40450[m[33m ([m[1;36mHEAD -> [m[1;32mscripts_raspberry[m[33m, [m[1;31morigin/scripts_raspberry[m[33m)[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Tue Jul 30 21:03:12 2024 -0300
+
+    Add haarcascade xml to lib folder
+
+[33mcommit 8ede3cbdc7a509316ae18a17f3cc62b886a36251[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Tue Jul 30 20:50:44 2024 -0300
+
+    Fix paths
+
+[33mcommit 36f7574eb12f5643bfe7703613916abca336f55a[m[33m ([m[1;31mtakeControl/scripts_raspberry[m[33m, [m[1;31mtakeControl/master[m[33m)[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Mon Jul 29 14:47:26 2024 -0300
+
+    Future improve to get wifi MAC address
+
+[33mcommit 48d97b7d5738db058267d0d40cba20d14bb59e83[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Mon Jul 29 14:40:21 2024 -0300
+
+    Add timer to main. Create GPIOInput and testInput for test. Modularizate GPIO_handler
+
+[33mcommit 440f21fdf6dda9677939d1c6409382ddbfe107ac[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Sat Jul 13 15:33:41 2024 -0300
+
+    Add register file. Add tries. Some additional fixes
+
+[33mcommit 0b473c1dcc5fd873860bbf3ba05bc0e0f1157544[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Fri Jul 12 20:56:28 2024 -0300
+
+    Generate path archive
+
+[33mcommit 26410cc94055629159a70a4e1cbdac0ae7239a5d[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Tue Jul 9 21:13:00 2024 -0300
+
+    Clean unnecesary files
+
+[33mcommit 53ae20e5d16a6e901ad2ccddf6a8159c9534475d[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Tue Jul 9 21:10:32 2024 -0300
+
+    Improves
+
+[33mcommit 8a92f436e2e5277287123494726a0727c735ebf2[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Tue Jul 9 21:10:20 2024 -0300
+
+    Improves on project
+
+[33mcommit 05c5fb6b2aa079b69e8fdfa3325268cf1c4291b6[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Thu Jun 20 09:20:02 2024 -0300
+
+    Improves on names on Modules. Fix request to API in case when user is not recognized
+
+[33mcommit 7b2ef4797dd3cf6a66937bbf1e2e7be807629abd[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Thu Jun 13 22:18:05 2024 -0300
+
+    Define main.py and main() method
+
+[33mcommit b4ba300e400e05c441a0f3a5a7457d0a42b6a5b1[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Thu Jun 13 22:14:26 2024 -0300
+
+    Improves on structure of project
+
+[33mcommit 7a1bfbeee03c90147fabf660b6aec9720e16ac24[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Thu Jun 13 22:04:07 2024 -0300
+
+    Modularize FaceAuth
+
+[33mcommit 16f016efc3d94d59742dfc14a450d44a3a700b47[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Thu Jun 13 08:17:19 2024 -0300
+
+    Add retries to demo. Add LoginStepOne and LoginStepTwo methods. Create hardware module
+
+[33mcommit 13a1ef48888a676b2d0f356ae3a25b761f96a6a8[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Sat Jun 1 19:03:11 2024 -0300
+
+    Demo
+
+[33mcommit 7f148e49a9e45f6cdcb8908e5d015c258fbbec43[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Sat Mar 16 19:32:08 2024 -0300
+
+    Improves on code. Delete FisherFace Detection
+
+[33mcommit aaf9483c4610228241f4aac778381742e05f7a17[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Sat Mar 16 16:15:27 2024 -0300
+
+    Leave the LBPH detection working
+
+[33mcommit 9151c9fcf6d8fd294dcb8cfc9913e71aa0e9488e[m
+Author: Bruno Capelli <brunoicapelli@gmail.com>
+Date:   Wed Mar 6 21:34:43 2024 -0300
+
+    first commit
