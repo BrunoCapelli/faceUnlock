@@ -39,6 +39,7 @@ def main():
 		try:
 			responseLogin = apiModule.LoginStepTwo(urlUser, 'Bruno', 1, 'hwd', access_token)
 			print("Sending notification...")
+			print(responseLogin)
 			if responseLogin.ok:
 				GPIO_handler.Activate_Pin17() # Green LED
 				time.sleep(20)
