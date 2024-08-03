@@ -38,10 +38,9 @@ def main():
 
 	if(isUserDetected):
 		try:
-			print(f"{apiModule.LoginStepTwo(urlUser, 'Bruno', 1, 'hwd', access_token)}")
 			responseLogin = apiModule.LoginStepTwo(urlUser, 'Bruno', 1, 'hwd', access_token)
 			print("Sending notification...")
-			print(f"{responseLogin.request} {responseLogin.content} {re} ")
+			print(f"{responseLogin.request} {responseLogin.content} {responseLogin.text} ")
 			if responseLogin.ok:
 				GPIO_handler.Activate_Pin17() # Green LED
 				time.sleep(20)
