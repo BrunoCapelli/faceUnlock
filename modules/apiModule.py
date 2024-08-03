@@ -16,5 +16,6 @@ def LoginStepTwo(url, idUser, idDevice, hwdId, token):
 		'idUser': idUser,
 		'hwd': hwdId
 	}
+	print(f"{headers}  {params}")
 	request = requests.post(url, params=params, headers=headers, verify=False)
 	return request
