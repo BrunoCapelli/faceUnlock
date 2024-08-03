@@ -21,6 +21,7 @@ def main():
 
 	#  Get access token 
 	response = apiModule.LoginStepOne(urlDevice, 1, 'hwd')
+	print(response)
 	response_dict = json.loads(response)
 	access_token = response_dict['accessToken']
 
